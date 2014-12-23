@@ -54,4 +54,5 @@ else
 fi
 }
 
-install_zsh
+#Uncomment the line below if you want to install zsh.
+#install_zsh
