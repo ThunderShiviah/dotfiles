@@ -11,6 +11,11 @@ set nocompatible
 "Display status line
 set laststatus=2
 
+" size of a hard tabstop
+set tabstop=2
+
+"always use spaces instead of tab characters
+set expandtab
 
 " Set line number
 set number
