@@ -14,6 +14,9 @@ set laststatus=2
 " size of a hard tabstop
 set tabstop=2
 
+" size of an indent
+set shiftwidth=2
+
 "always use spaces instead of tab characters
 set expandtab
 
@@ -89,7 +92,7 @@ if has("autocmd")
 else
 
   set autoindent		" always set autoindenting on
-
+  set smartindent
 endif " has("autocmd")
 
 " Convenient command to see the difference between the current buffer and the
