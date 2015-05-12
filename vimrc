@@ -4,6 +4,11 @@ if v:progname =~? "evim"
   finish
 endif
 
+" Tell vim to create <Filename>.un~ files whenever you edit. These files
+" contain undo info so you can undo previous actions even after you close and
+" reopen a file.
+set undofile
+
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
@@ -12,10 +17,10 @@ set nocompatible
 set laststatus=2
 
 " size of a hard tabstop
-set tabstop=2
+set tabstop=4
 
 " size of an indent
-set shiftwidth=2
+set shiftwidth=4
 
 "always use spaces instead of tab characters
 set expandtab
@@ -26,8 +31,19 @@ set number
 " Map : onto ;
 nore ; :
 
+" Map ; onto :
+nore : ;
+
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
+
+"These lines manage my line wrapping settings and also show a colored column
+"at 85 characters (so I can see when I write a too-long line of code). 
+set wrap
+set textwidth=79
+set formatoptions=qrn1
+set colorcolumn=79
+
 
 if has("vms")
   set nobackup		" do not keep a backup file, use versions instead
@@ -102,3 +118,48 @@ if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
 		  \ | wincmd p | diffthis
 endif
+
+" Remap the escape key  
+inoremap jk <ESC> 
+
+inoremap ( ()<Esc>i
+
+
+inoremap " ""<Esc>i
+
+inoremap < <><Esc>i
+
+inoremap ' ''<Esc>i
+
+" Save when focus to current document is lost.
+au FocusLost * :wa 
+
+" <leader>w opens a new vertical split and switches over to it.
+nnoremap <leader>w <C-w>v<C-w>l
+
+" The below is for efficient navigation of window splits.
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" The below fix search
+set ignorecase
+set smartcase
+set gdefault
+set incsearch
+set showmatch
+set hlsearch
+nnoremap <leader><space> :noh<cr> " This clears the search highlighting. 
+nnoremap <tab> %
+vnoremap <tab> %
+
+" Remap the leader key to comma.
+let mapleader = ","
+
+"for vim-pathogen
+execute pathogen#infect()
+
+"run flake8 every time I write a python file
+autocmd BufWritePost *.py call Flake8()
+autocmd FileType python map <buffer> <leader>f :call Flake8()<CR>>

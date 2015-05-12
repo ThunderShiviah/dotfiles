@@ -41,7 +41,7 @@ case "$TERM" in
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
+# off by ttttttt to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
 #force_color_prompt=yes
 
@@ -144,3 +144,12 @@ PATH="$NPM_PACKAGES/bin:$PATH"
 # command
 unset MANPATH  # delete if you already modified MANPATH elsewhere in your config
 MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+
+export BLOG_DIR=/home/thunder/Documents/blog/ThunderShiviah.github.io
+nbconvert(){
+    ipython nbconvert --config jekyll.py $@;
+    find ${BLOG_DIR}/notebooks/ -name '*.md' -exec mv {} ${BLOG_DIR}/_drafts/ \;
+    cp $@ ${BLOG_DIR}/notebooks/
+}
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
