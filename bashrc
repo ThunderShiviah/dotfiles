@@ -116,9 +116,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# added by Anaconda 1.9.1 installer
-export PATH="/home/thunder/anaconda/bin:$PATH"
-
 
 # Do automatically an ls after every successfull cd.
 function cd {
@@ -152,4 +149,13 @@ nbconvert(){
     cp $@ ${BLOG_DIR}/notebooks/
 }
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
+export PATH
+
+# added by Anaconda 2.2.0 installer
+export PATH="/home/thunder/anaconda/bin:$PATH"
+
+eval "$(register-python-argcomplete conda)"

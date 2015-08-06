@@ -163,3 +163,5 @@ execute pathogen#infect()
 "run flake8 every time I write a python file
 autocmd BufWritePost *.py call Flake8()
 autocmd FileType python map <buffer> <leader>f :call Flake8()<CR>>
+
+set foldmethod=indent
